@@ -51,4 +51,8 @@ public class RoleService {
         } else
             return ResponseEntity.unprocessableEntity().body("No Records Found");
     }
+
+    public ResponseEntity<Object> findAllRoles() {
+        return ResponseEntity.ok(roleRepository.findAll());
+    }
 }

@@ -1,18 +1,23 @@
 package com.notyfyd.entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "t_role")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
 
-    @OneToMany(targetEntity = User.class, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("role")
     private List<User> users;
+
     public Long getId() {
         return this.id;
     }
@@ -36,5 +41,8 @@ public class Role {
     }
     public void setUsers(List<User> users) {
         this.users = users;
+        for (User u : users) {
+            u.setRole(this);
+        }
     }
 }

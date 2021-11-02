@@ -23,4 +23,9 @@ public class RoleController {
     public ResponseEntity<Object> deleteRole(@PathVariable Long id) {
         return roleService.deleteRole(id);
     }
+
+    @GetMapping("/role")
+    public ResponseEntity<Object> getRoles() {
+        return roleService.findAllRoles();
+    }
 }
